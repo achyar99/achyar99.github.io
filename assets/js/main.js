@@ -1,5 +1,5 @@
 // Site interactions: theme, mobile menu, nav shadow, reveal-on-scroll, research filter,
-// interactive timeline, lightbox, word rotator, count-up stats, copy-to-clipboard, back-to-top.
+// interactive timeline, lightbox, word rotator, count-up stats, image save guard, copy-to-clipboard, back-to-top.
 (function () {
   var root = document.documentElement;
 
@@ -153,6 +153,11 @@
     lb.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
     lb.addEventListener('touchend', function (e) { if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) open(cur + (dx < 0 ? 1 : -1)); x0 = null; });
   }
+
+  // ---- discourage saving images: no context menu or dragging on any image (including the lightbox)
+  ['contextmenu', 'dragstart'].forEach(function (ev) {
+    document.addEventListener(ev, function (e) { if (e.target.tagName === 'IMG') e.preventDefault(); });
+  });
 
   // ---- copy email
   document.querySelectorAll('[data-copy]').forEach(function (b) {

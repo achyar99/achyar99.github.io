@@ -333,3 +333,6 @@ footer .legal .wrap{display:flex;justify-content:space-between;padding-block:18p
 .stages li.now{color:var(--ink);font-weight:600}
 .stages li.now::before{border-color:var(--spark);background:var(--spark);box-shadow:0 0 0 4px color-mix(in srgb,var(--spark) 25%,transparent)}
 .stages li.now em{color:var(--spark)}
+
+/* discourage saving images: no drag, no long-press save menu on touch devices */
+img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
