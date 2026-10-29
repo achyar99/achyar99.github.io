@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TaOx dynamic reservoir · Achyarul Mabruri</title>
-<meta name="description" content="Rebuilding a dynamic-memristor reservoir for spoken-digit recognition, step by step, until it matches the published result.">
+<meta name="description" content="Porting the authors&#x27; code for a dynamic-memristor reservoir to Python, then testing with control runs what actually carries the accuracy.">
 <link rel="canonical" href="https://achyar99.github.io/projects/taox-dynamic-reservoir.html">
 <meta property="og:title" content="TaOx dynamic reservoir · Achyarul Mabruri">
-<meta property="og:description" content="Rebuilding a dynamic-memristor reservoir for spoken-digit recognition, step by step, until it matches the published result.">
+<meta property="og:description" content="Porting the authors&#x27; code for a dynamic-memristor reservoir to Python, then testing with control runs what actually carries the accuracy.">
 <meta property="og:image" content="https://achyar99.github.io/assets/img/portrait.jpg">
 <meta property="og:url" content="https://achyar99.github.io/projects/taox-dynamic-reservoir.html">
 <meta property="og:type" content="website">
@@ -37,19 +37,19 @@
   <div class="drawer-foot"><a class="btn btn-primary" href="mailto:rurii99@korea.ac.kr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM22 6l-10 7L2 6"/></svg> Email me</a><a class="btn btn-ghost" href="../cv.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5"/></svg> CV</a></div>
 </div>
 <main id="main">
-<section class="page-head"><div class="grid-bg"></div><div class="wrap"><div class="crumbs"><a href="../research.html">Research</a> / TaOx dynamic reservoir</div><div class="label">Project</div><h1>Spoken-digit recognition with a TaOₓ dynamic-memristor reservoir</h1><p>Rebuilding a dynamic-memristor reservoir for spoken-digit recognition, step by step, until it matches the published result.</p></div></section>
+<section class="page-head"><div class="grid-bg"></div><div class="wrap"><div class="crumbs"><a href="../research.html">Research</a> / TaOx dynamic reservoir</div><div class="label">Project</div><h1>Spoken-digit recognition with a TaOₓ dynamic-memristor reservoir</h1><p>Porting the authors&#x27; code for a dynamic-memristor reservoir to Python, then testing with control runs what actually carries the accuracy.</p></div></section>
 <section class="section"><div class="wrap">
-  <div class="metrics"><div class="metric" data-reveal><b>96.6%</b><span>spoken-digit accuracy, faithful replication</span></div><div class="metric" data-reveal><b>99.6%</b><span>accuracy reported in the paper</span></div><div class="metric" data-reveal><b>22.8%</b><span>my first simplified model</span></div></div>
+  <div class="metrics"><div class="metric" data-reveal><b>96.6%</b><span>spoken-digit accuracy, paper&#x27;s 45/5 split</span></div><div class="metric" data-reveal><b>99.6%</b><span>accuracy reported in the paper</span></div><div class="metric" data-reveal><b>~49%</b><span>on speakers not seen in training</span></div></div>
   <div class="proj-hero">
     <div class="prose">
       <div class="tags"><a class="tag on" href="../research.html#reservoir">Reservoir computing</a><a class="tag on" href="../research.html#replication">Paper replications</a></div>
-      <h2>The problem</h2><p>Dynamic (volatile) memristors can act as the &#x27;reservoir&#x27; of a recurrent network for temporal tasks such as speech. Getting close to published accuracy depends on details papers rarely spell out.</p>
-      <h2>What I did</h2><ul><li>Fitted the device&#x27;s decay and write nonlinearity from the paper&#x27;s measurements (Zhong et al.).</li><li>Started from my own simplified single-channel model, then added multi-channel inputs and a cochlear-spectrum front end.</li><li>Benchmarked on the Free Spoken Digit Dataset with leave-one-speaker-out validation.</li></ul>
-      <h2>What I learned</h2><p>The input encoding, not the device alone, carried most of the accuracy: going from one channel to a cochlear front end took the model from 23% to 97%.</p>
+      <h2>The problem</h2><p>Dynamic (volatile) memristors can act as the &#x27;reservoir&#x27; of a recurrent network for temporal tasks such as speech. Matching a published accuracy says little unless you also check what produces it.</p>
+      <h2>What I did</h2><ul><li>Fitted the device&#x27;s decay and write nonlinearity from the paper&#x27;s measurements (Zhong et al.).</li><li>Ported the authors&#x27; MATLAB pipeline to Python, checked it line by line, and reached 96.6% on the paper&#x27;s data and random 45/5 split.</li><li>Ran controls with the same masks, readout and data: the device with its memory removed, masked input with no device, and raw cochleagram features, each on the paper&#x27;s split and with leave-one-speaker-out.</li></ul>
+      <h2>What I learned</h2><p>The port matched, but the device&#x27;s memory added nothing: the score was unchanged without it, and all versions fell to about 49% on unseen speakers. I now build such controls into every study.</p>
       <p style="margin-top:18px"><a class="btn btn-primary" href="https://github.com/achyar99/taox-dynamic-memristor-rc">View on GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
     <div>
-      <figure class="figure" data-reveal><img src="../assets/fig/taox-rc.jpg" alt="From a simplified single-channel model (22.8%) to a faithful replication (96.6%), compared with the paper&#x27;s 99.6%." data-zoom data-caption="From a simplified single-channel model (22.8%) to a faithful replication (96.6%), compared with the paper&#x27;s 99.6%."><figcaption>From a simplified single-channel model (22.8%) to a faithful replication (96.6%), compared with the paper&#x27;s 99.6%. <span class="muted">(click to enlarge)</span></figcaption></figure>
+      <figure class="figure" data-reveal><img src="../assets/fig/taox-controls.jpg" alt="My port of the authors&#x27; code, with control runs: removing the device&#x27;s memory leaves the score unchanged, and every version drops to about 49% on unseen speakers." data-zoom data-caption="My port of the authors&#x27; code, with control runs: removing the device&#x27;s memory leaves the score unchanged, and every version drops to about 49% on unseen speakers."><figcaption>My port of the authors&#x27; code, with control runs: removing the device&#x27;s memory leaves the score unchanged, and every version drops to about 49% on unseen speakers. <span class="muted">(click to enlarge)</span></figcaption></figure>
       <dl class="proj-facts" style="margin-top:18px">
         <div><dt>Status</dt><dd>Completed · study project</dd></div>
         <div><dt>Period</dt><dd>2026</dd></div>
