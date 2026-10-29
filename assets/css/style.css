@@ -336,3 +336,6 @@ footer .legal .wrap{display:flex;justify-content:space-between;padding-block:18p
 
 /* discourage saving images: no drag, no long-press save menu on touch devices */
 img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+
+/* topic illustrations on project cards without public figures */
+.card .thumb.pattern svg.art{width:62%;height:auto;max-height:78%;opacity:.85}
