@@ -169,7 +169,7 @@ a.card:hover .thumb img{transform:scale(1.03)}
 .prose li{margin-bottom:8px}
 .figure{background:#fff;border:1px solid var(--rule);border-radius:var(--radius);padding:14px;margin:0}
 .figure img{border-radius:8px;cursor:zoom-in}
-.figure figcaption{color:#56625d;font-size:.86rem;margin-top:10px;line-height:1.45}
+.figure figcaption{color:#4a4f60;font-size:.86rem;margin-top:10px;line-height:1.45}
 .proj-nav{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:24px;border-top:1px solid var(--rule)}
 .proj-nav a{text-decoration:none;color:var(--ink);font-weight:700;max-width:46%}
 .proj-nav a span{display:block;font-family:var(--f-mono);font-size:.72rem;color:var(--muted);font-weight:400}
@@ -339,3 +339,110 @@ img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none;-webkit-tou
 
 /* topic illustrations on project cards without public figures */
 .card .thumb.pattern svg.art{width:62%;height:auto;max-height:78%;opacity:.85}
+
+/* =====================================================================
+   v2 look (Nov 2026): calm editorial pages, one indigo accent, light hero
+   with a faint crossbar-array motif (lines + a few "programmed" cells).
+   ===================================================================== */
+:root{
+  --bg:#f7f6f2; --surface:#ffffff; --surface-2:#eef0fa; --ink:#14151f; --muted:#4a4f60; --rule:#e2e3ec;
+  --accent:#3343d6; --accent-ink:#ffffff; --accent-soft:#e8eafc; --spark:#e8961c;
+  --band:#15173a; --band-ink:#eef0fb; --band-muted:#a9aed0; --band-rule:#2a2d5a;
+  --tint:#f0f1fb; --shadow:0 1px 2px rgba(20,21,31,.05),0 10px 30px rgba(35,40,110,.08);
+  --radius:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0e1a; --surface:#151729; --surface-2:#1c1f38; --ink:#ebecf6; --muted:#a3a7c2; --rule:#272a47;
+  --accent:#8f9bff; --accent-ink:#0d0e1a; --accent-soft:#1f2350; --spark:#f2b04a; --tint:#121427;
+  --band:#090a16; --band-rule:#23264a}}
+:root[data-theme="dark"]{
+  --bg:#0d0e1a; --surface:#151729; --surface-2:#1c1f38; --ink:#ebecf6; --muted:#a3a7c2; --rule:#272a47;
+  --accent:#8f9bff; --accent-ink:#0d0e1a; --accent-soft:#1f2350; --spark:#f2b04a; --tint:#121427;
+  --band:#090a16; --band-rule:#23264a}
+
+/* section labels: readable, with a short accent rule */
+.label{font-size:.78rem;letter-spacing:.14em;font-weight:600;display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:22px;height:2px;background:currentColor;border-radius:2px}
+
+/* crossbar motif: thin word/bit lines + a few lit cells */
+.grid-bg{background-image:
+   radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--accent) 70%,transparent) 0 2.2px,transparent 3px),
+   linear-gradient(color-mix(in srgb,var(--accent) 14%,transparent) 1px,transparent 1px),
+   linear-gradient(90deg,color-mix(in srgb,var(--accent) 14%,transparent) 1px,transparent 1px);
+  background-size:176px 132px,44px 44px,44px 44px;background-position:-22px -22px,0 0,0 0;
+  mask-image:radial-gradient(ellipse at 85% 15%,#000 0%,transparent 62%);-webkit-mask-image:radial-gradient(ellipse at 85% 15%,#000 0%,transparent 62%);opacity:1}
+
+/* light hero + light page headers with a soft gradient */
+.hero,.page-head{background:
+   radial-gradient(900px 520px at 88% -10%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%),
+   radial-gradient(700px 420px at -10% 110%,color-mix(in srgb,var(--spark) 12%,transparent),transparent 70%),
+   var(--bg);color:var(--ink);border-bottom:1px solid var(--rule)}
+.hero .lede,.page-head h1{color:var(--ink)}
+.hero .sub,.page-head p{color:var(--muted)}
+.page-head .label,.hero .label{color:var(--accent)}
+.crumbs,.crumbs a{color:var(--muted)}
+.hero h1{letter-spacing:-.03em}
+.hero h1 .hl{color:var(--accent);background:linear-gradient(transparent 68%,color-mix(in srgb,var(--spark) 35%,transparent) 68%);padding-inline:.04em}
+.rotator{color:var(--accent);border-bottom-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.pill{color:var(--ink);border-color:var(--rule);background:var(--surface)}
+.hero .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--rule)}
+.loop path{stroke:var(--accent)}
+.loop{opacity:.12}
+/* portrait sits on an offset tinted panel */
+.portrait-card::before{content:"";position:absolute;inset:22px -22px -22px 22px;border-radius:28px;background:linear-gradient(150deg,var(--accent-soft),color-mix(in srgb,var(--spark) 18%,var(--surface)));z-index:-1}
+.portrait-card{z-index:0}
+.portrait-card img{border:0;box-shadow:var(--shadow)}
+
+/* stats: one calm panel with dividers */
+.stats{gap:0;background:var(--surface);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-top:-36px}
+.stat{border:0;border-radius:0;box-shadow:none;border-right:1px solid var(--rule);padding:26px 24px}
+.stat:last-child{border-right:0}
+
+/* tinted alternate sections (Ronin-style rhythm) */
+main > .section:nth-of-type(even):not(.band){background:var(--tint)}
+
+/* cards: framed figures on a tinted mat (Clyde-style) */
+.card{border-color:var(--rule);box-shadow:0 1px 2px rgba(20,21,31,.04)}
+a.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 35%,var(--rule))}
+.card .thumb{background:var(--surface-2);padding:14px;border-bottom:0}
+.card .thumb img{object-fit:contain;object-position:center;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(20,21,31,.08)}
+.card .thumb.pattern{padding:0;background:linear-gradient(140deg,var(--accent-soft),color-mix(in srgb,var(--spark) 10%,var(--surface-2)))}
+.card h3{font-size:1.22rem;letter-spacing:-.01em}
+.card .body{padding:22px}
+
+/* pillars: big step numbers instead of coloured chips */
+.pillar{background:var(--surface);transition:border-color .2s,transform .2s}
+.pillar:hover{border-color:color-mix(in srgb,var(--accent) 35%,var(--rule));transform:translateY(-3px)}
+.pillar .step{color:var(--accent);font-size:.76rem}
+
+/* project pages */
+.metric{background:var(--surface);border:1px solid var(--rule);border-top:3px solid var(--accent)}
+.figure{box-shadow:0 1px 3px rgba(20,21,31,.05)}
+.proj-facts,.stages{background:var(--surface)}
+
+/* dark bands (CTA, "beyond the lab", footer) in deep indigo */
+.band .label,.page-head.band .label{color:var(--spark)}
+.cta-band{background:linear-gradient(135deg,var(--band),#262a72)}
+.cta-band .grid-bg{mask-image:radial-gradient(ellipse at 90% 10%,#000 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 90% 10%,#000 0%,transparent 70%);opacity:.6}
+.award.featured{background:linear-gradient(150deg,var(--band),#262a72)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.menu a[aria-current="page"]{font-weight:700}
+@media (max-width:1024px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+@media (max-width:640px){.stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid var(--rule)}.portrait-card::before{inset:14px -10px -14px 14px}}
+
+/* v2.1 calmer: muted dark-mode accent, slate background, softer glow, flat bands */
+:root{--band:#1a1c33;--band-rule:#2c2f4a;--band-muted:#a6a9c2}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101219; --surface:#171a24; --surface-2:#1d2130; --tint:#13151e; --rule:#272b3a; --ink:#e8e9ef; --muted:#a2a6b8;
+  --accent:#a9b3ee; --accent-soft:#232842; --spark:#e0a956; --band:#0b0c12; --band-rule:#22253a}}
+:root[data-theme="dark"]{
+  --bg:#101219; --surface:#171a24; --surface-2:#1d2130; --tint:#13151e; --rule:#272b3a; --ink:#e8e9ef; --muted:#a2a6b8;
+  --accent:#a9b3ee; --accent-soft:#232842; --spark:#e0a956; --band:#0b0c12; --band-rule:#22253a}
+.cta-band,.award.featured{background:var(--band)}
+:root[data-theme="dark"] .hero,:root[data-theme="dark"] .page-head{background:
+   radial-gradient(900px 520px at 88% -10%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),
+   radial-gradient(700px 420px at -10% 110%,color-mix(in srgb,var(--spark) 5%,transparent),transparent 70%),var(--bg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero,:root:not([data-theme="light"]) .page-head{background:
+   radial-gradient(900px 520px at 88% -10%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),
+   radial-gradient(700px 420px at -10% 110%,color-mix(in srgb,var(--spark) 5%,transparent),transparent 70%),var(--bg)}}
+:root[data-theme="dark"] .grid-bg{opacity:.6}
