@@ -1,6 +1,6 @@
 # achyar99.github.io
 
-Personal website of **Achyarul Mabruri (Ruri)**, M.S. researcher in Semiconductor & Nano Systems at Korea University.
+Personal website of **Achyarul Mabruri**, M.S. researcher in Semiconductor & Nano Systems at Korea University.
 Live at https://achyar99.github.io
 
 Plain HTML, CSS and JavaScript; no framework.
