@@ -446,3 +446,8 @@ a.card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:co
    radial-gradient(900px 520px at 88% -10%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),
    radial-gradient(700px 420px at -10% 110%,color-mix(in srgb,var(--spark) 5%,transparent),transparent 70%),var(--bg)}}
 :root[data-theme="dark"] .grid-bg{opacity:.6}
+
+/* hero: full-name greeting on its own smaller line, tagline stays large */
+.hero h1 .greet{display:block;font-size:.6em;letter-spacing:-.02em;margin-bottom:.18em;color:var(--ink)}
+.hero h1{font-size:clamp(2.4rem,5.4vw,4.3rem)}
+@media (max-width:640px){.hero h1 .greet{font-size:.68em}}
